@@ -3,7 +3,7 @@
 namespace Pragmatist\Regel\Engine;
 
 use Pragmatist\Regel\Rule\Rule;
-use Pragmatist\Regel\Rule\RuleSet;
+use Pragmatist\Regel\RuleSet\RuleSet;
 
 interface Engine
 {

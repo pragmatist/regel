@@ -1,10 +1,10 @@
 <?php
 
-namespace Pragmatist\Regel\Tests\Rule;
+namespace Pragmatist\Regel\Tests\RuleSet;
 
 use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Rule\ActionableRule;
-use Pragmatist\Regel\Rule\ArrayRuleSet;
+use Pragmatist\Regel\RuleSet\ArrayRuleSet;
 use Pragmatist\Regel\Tests\Fixtures\NonCallableAction;
 use Symfony\Component\ExpressionLanguage\Expression;
 
@@ -28,7 +28,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
     public function itShouldFailWhenInstantiatedWithInvalidValues()
     {
         $this->setExpectedException(\InvalidArgumentException::class);
-        new ArrayRuleSet(['foo', 'bar']);
+        new \Pragmatist\Regel\RuleSet\ArrayRuleSet(['foo', 'bar']);
     }
 
     /**
@@ -37,7 +37,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
     public function itShouldSetRules()
     {
         $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
-        $ruleSet = new ArrayRuleSet([]);
+        $ruleSet = new \Pragmatist\Regel\RuleSet\ArrayRuleSet([]);
         $ruleSet[0] = $rule;
         $this->assertArrayHasKey(0, $ruleSet);
         $this->assertEquals($rule, $ruleSet[0]);
@@ -49,7 +49,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldFailWhenSettingAnInvalidRule()
     {
-        $ruleSet = new ArrayRuleSet([]);
+        $ruleSet = new \Pragmatist\Regel\RuleSet\ArrayRuleSet([]);
 
         $this->setExpectedException(\InvalidArgumentException::class);
         $ruleSet[0] = 'foo';
@@ -61,7 +61,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
     public function itShouldBeTraversable()
     {
         $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
-        $ruleSet = new ArrayRuleSet([$rule]);
+        $ruleSet = new \Pragmatist\Regel\RuleSet\ArrayRuleSet([$rule]);
 
         foreach ($ruleSet as $key => $ruleSetRule) {
             $this->assertEquals(0, $key);

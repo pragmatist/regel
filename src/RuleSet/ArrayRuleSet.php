@@ -1,6 +1,9 @@
 <?php
 
-namespace Pragmatist\Regel\Rule;
+namespace Pragmatist\Regel\RuleSet;
+
+use Pragmatist\Regel\Rule\Rule;
+use Pragmatist\Regel\RuleSet\RuleSet;
 
 final class ArrayRuleSet implements RuleSet
 {

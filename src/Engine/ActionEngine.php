@@ -5,7 +5,7 @@ namespace Pragmatist\Regel\Engine;
 use Pragmatist\Regel\Action\ActionExecutor;
 use Pragmatist\Regel\Condition\Evaluator;
 use Pragmatist\Regel\Rule\Rule;
-use Pragmatist\Regel\Rule\RuleSet;
+use Pragmatist\Regel\RuleSet\RuleSet;
 
 final class ActionEngine implements Engine
 {

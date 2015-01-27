@@ -8,7 +8,7 @@ use Pragmatist\Regel\Condition\Evaluator;
 use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Engine\ActionEngine;
 use Pragmatist\Regel\Rule\ActionableRule;
-use Pragmatist\Regel\Rule\ArrayRuleSet;
+use Pragmatist\Regel\RuleSet\ArrayRuleSet;
 use Pragmatist\Regel\Tests\Fixtures\NonCallableAction;
 use Pragmatist\Regel\Tests\Fixtures\TestSubject;
 use Symfony\Component\ExpressionLanguage\Expression;
