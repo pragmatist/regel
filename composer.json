@@ -1,0 +1,38 @@
+{
+    "name": "pragmatist/regel",
+    "description": "A simple business rules engine.",
+    "keywords": ["rule engine", "business rules"],
+    "license": "MIT",
+    "homepage": "https://github.com/Pragmatist/Regel",
+    "authors": [
+        {
+            "name": "Frank van den Brink",
+            "email": "frank@pragmatist.nl",
+            "homepage": "https://pragmatist.nl"
+        }
+    ],
+    "require": {
+        "php":  ">=5.5"
+    },
+    "suggest": {
+        "symfony/expression-language": "Allows you to use the Symfony Expression language for conditions. Requires ~2.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.4",
+        "mockery/mockery": "0.9.*",
+        "symfony/expression-language": "~2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pragmatist\\Workflow\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pragmatist\\Workflow\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

@@ -1,2 +1,3 @@
-# RuleEngine
-A simple business rules engine.
+# Regel
+
+A simple business rules engine. Still in active development.
