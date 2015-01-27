@@ -36,4 +36,14 @@ final class InMemoryRuleSetProviderTest extends \PHPUnit_Framework_TestCase
             $provider->getRuleSetIdentifiedBy('test')
         );
     }
+
+    /**
+     * @test
+     */
+    public function itShouldFailIfRuleSetDoesNotExist()
+    {
+        $this->setExpectedException(\InvalidArgumentException::class);
+        $provider = new InMemoryRuleSetProvider();
+        $provider->getRuleSetIdentifiedBy('test');
+    }
 }

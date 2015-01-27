@@ -9,12 +9,18 @@ use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Engine\ActionEngine;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\RuleSet\ArrayRuleSet;
+use Pragmatist\Regel\RuleSetProvider\RuleSetProvider;
 use Pragmatist\Regel\Tests\Fixtures\NonCallableAction;
 use Pragmatist\Regel\Tests\Fixtures\TestSubject;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 final class ActionEngineTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Mockery\MockInterface
+     */
+    private $ruleSetProvider;
+
     /**
      * @var \Mockery\MockInterface
      */
@@ -32,55 +38,14 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->ruleSetProvider = m::mock(RuleSetProvider::class);
         $this->evaluator = m::mock(Evaluator::class);
         $this->actionExecutor = m::mock(ActionExecutor::class);
 
         $this->engine = new ActionEngine(
+            $this->ruleSetProvider,
             $this->evaluator,
             $this->actionExecutor
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function itShouldApplyRuleToSubject()
-    {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
-        $subject = new TestSubject();
-
-        $this->evaluator->shouldReceive('evaluate')
-            ->once()
-            ->with($rule->getCondition(), $subject)
-            ->andReturn(true);
-
-        $this->actionExecutor->shouldReceive('execute')
-            ->once()
-            ->with($rule->getAction(), $subject);
-
-        $this->assertTrue(
-            $this->engine->applyRuleToSubject($rule, $subject)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function itShouldNotExecuteActionIfRuleConditionEvaluatesToFalse()
-    {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
-        $subject = new TestSubject();
-
-        $this->evaluator->shouldReceive('evaluate')
-            ->once()
-            ->with($rule->getCondition(), $subject)
-            ->andReturn(false);
-
-        $this->actionExecutor->shouldReceive('execute')
-            ->never();
-
-        $this->assertFalse(
-            $this->engine->applyRuleToSubject($rule, $subject)
         );
     }
 
@@ -93,6 +58,11 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
         $ruleSet = new ArrayRuleSet([$rule]);
         $subject = new TestSubject();
 
+        $this->ruleSetProvider->shouldReceive('getRuleSetIdentifiedBy')
+            ->once()
+            ->with('testRuleSet')
+            ->andReturn($ruleSet);
+
         $this->evaluator->shouldReceive('evaluate')
             ->once()
             ->with($rule->getCondition(), $subject)
@@ -102,7 +72,7 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->with($rule->getAction(), $subject);
 
-        $this->engine->applyRuleSetToSubject($ruleSet, $subject);
+        $this->engine->applyRuleSetToSubject('testRuleSet', $subject);
     }
 
     /**
@@ -114,6 +84,11 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
         $ruleSet = new ArrayRuleSet([$rule, $rule]);
         $subject = new TestSubject();
 
+        $this->ruleSetProvider->shouldReceive('getRuleSetIdentifiedBy')
+            ->once()
+            ->with('testRuleSet')
+            ->andReturn($ruleSet);
+
         $this->evaluator->shouldReceive('evaluate')
             ->once()
             ->with($rule->getCondition(), $subject)
@@ -122,6 +97,6 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
         $this->actionExecutor->shouldReceive('execute')
             ->never();
 
-        $this->engine->applyRuleSetToSubject($ruleSet, $subject);
+        $this->engine->applyRuleSetToSubject('testRuleSet', $subject);
     }
 }

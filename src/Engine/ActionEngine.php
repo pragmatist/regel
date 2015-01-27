@@ -5,10 +5,15 @@ namespace Pragmatist\Regel\Engine;
 use Pragmatist\Regel\Action\ActionExecutor;
 use Pragmatist\Regel\Condition\Evaluator;
 use Pragmatist\Regel\Rule\Rule;
-use Pragmatist\Regel\RuleSet\RuleSet;
+use Pragmatist\Regel\RuleSetProvider\RuleSetProvider;
 
 final class ActionEngine implements Engine
 {
+    /**
+     * @var RuleSetProvider
+     */
+    private $ruleSetProvider;
+
     /**
      * @var Evaluator
      */
@@ -20,22 +25,24 @@ final class ActionEngine implements Engine
     private $actionExecutor;
 
     /**
+     * @param RuleSetProvider $ruleSetProvider
      * @param Evaluator $evaluator
      * @param ActionExecutor $actionExecutor
      */
-    public function __construct(Evaluator $evaluator, ActionExecutor $actionExecutor)
+    public function __construct(RuleSetProvider $ruleSetProvider, Evaluator $evaluator, ActionExecutor $actionExecutor)
     {
+        $this->ruleSetProvider = $ruleSetProvider;
         $this->evaluator = $evaluator;
         $this->actionExecutor = $actionExecutor;
     }
 
     /**
-     * @param RuleSet $ruleSet
+     * @param string $ruleSetIdentifier
      * @param mixed $subject
      */
-    public function applyRuleSetToSubject(RuleSet $ruleSet, $subject)
+    public function applyRuleSetToSubject($ruleSetIdentifier, $subject)
     {
-        /** @var Rule $rule */
+        $ruleSet = $this->ruleSetProvider->getRuleSetIdentifiedBy($ruleSetIdentifier);
         foreach ($ruleSet as $rule) {
             if (!$this->applyRuleToSubject($rule, $subject)) {
                 break;
@@ -48,7 +55,7 @@ final class ActionEngine implements Engine
      * @param mixed $subject
      * @return bool
      */
-    public function applyRuleToSubject(Rule $rule, $subject)
+    private function applyRuleToSubject(Rule $rule, $subject)
     {
         if (!$this->evaluator->evaluate($rule->getCondition(), $subject)) {
             return false;

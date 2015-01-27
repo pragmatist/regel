@@ -2,21 +2,11 @@
 
 namespace Pragmatist\Regel\Engine;
 
-use Pragmatist\Regel\Rule\Rule;
-use Pragmatist\Regel\RuleSet\RuleSet;
-
 interface Engine
 {
     /**
-     * @param RuleSet $ruleSet
+     * @param string $ruleSetIdentifier
      * @param mixed $subject
      */
-    public function applyRuleSetToSubject(RuleSet $ruleSet, $subject);
-
-    /**
-     * @param Rule $rule
-     * @param mixed $subject
-     * @return bool
-     */
-    public function applyRuleToSubject(Rule $rule, $subject);
+    public function applyRuleSetToSubject($ruleSetIdentifier, $subject);
 }
