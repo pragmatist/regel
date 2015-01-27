@@ -36,8 +36,27 @@ final class ExpressionLanguageEvaluatorTest extends \PHPUnit_Framework_TestCase
         $subject = new TestSubject();
 
         $this->expressionLanguage->shouldReceive('evaluate')
+            ->once()
             ->with($condition->getExpression(), ['subject' => $subject])
             ->andReturn(true);
+
+        $this->assertTrue(
+            $this->evaluator->evaluate($condition, $subject)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldCastEvaluationResultToBoolean()
+    {
+        $condition = ExpressionLanguageCondition::fromString('true');
+        $subject = new TestSubject();
+
+        $this->expressionLanguage->shouldReceive('evaluate')
+            ->once()
+            ->with($condition->getExpression(), ['subject' => $subject])
+            ->andReturn(1);
 
         $this->assertTrue(
             $this->evaluator->evaluate($condition, $subject)
@@ -53,6 +72,7 @@ final class ExpressionLanguageEvaluatorTest extends \PHPUnit_Framework_TestCase
         $subject = new TestSubject();
 
         $this->expressionLanguage->shouldReceive('evaluate')
+            ->once()
             ->with($condition->getExpression(), ['subject' => $subject])
             ->andThrow(SyntaxError::class);
 
