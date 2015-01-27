@@ -24,7 +24,7 @@ final class ExpressionLanguageEvaluator implements Evaluator
      */
     public function evaluate(Condition $condition, $subject)
     {
-        return $this->expressionLanguage->evaluate(
+        return (bool) $this->expressionLanguage->evaluate(
             $condition->getExpression(),
             ['subject' => $subject]
         );
