@@ -70,3 +70,10 @@ $ruleSet = new ArrayRuleSet(
     ]
 );
 ```
+
+Now we can apply the rule set to the message:
+
+```php
+$engine->applyRuleSetToSubject($ruleSet, new EmailMessage());
+
+```
