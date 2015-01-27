@@ -9,8 +9,8 @@ use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Engine\ActionEngine;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\Rule\ArrayRuleSet;
-use Pragmatist\Regel\Tests\Fixtures\MyAction;
-use Pragmatist\Regel\Tests\Fixtures\MySubject;
+use Pragmatist\Regel\Tests\Fixtures\NonCallableAction;
+use Pragmatist\Regel\Tests\Fixtures\TestSubject;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 final class ActionEngineTest extends \PHPUnit_Framework_TestCase
@@ -46,8 +46,8 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldApplyRuleToSubject()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
-        $subject = new MySubject();
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
+        $subject = new TestSubject();
 
         $this->evaluator->shouldReceive('evaluate')
             ->once()
@@ -68,8 +68,8 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldNotExecuteActionIfRuleConditionEvaluatesToFalse()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
-        $subject = new MySubject();
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
+        $subject = new TestSubject();
 
         $this->evaluator->shouldReceive('evaluate')
             ->once()
@@ -89,9 +89,9 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldApplyRuleSetToSubject()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule]);
-        $subject = new MySubject();
+        $subject = new TestSubject();
 
         $this->evaluator->shouldReceive('evaluate')
             ->once()
@@ -110,9 +110,9 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldAbortIfRuleSetRuleEvaluatesToFalse()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule, $rule]);
-        $subject = new MySubject();
+        $subject = new TestSubject();
 
         $this->evaluator->shouldReceive('evaluate')
             ->once()

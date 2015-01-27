@@ -5,7 +5,7 @@ namespace Pragmatist\Regel\Tests;
 use Mockery as m;
 use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Condition\ExpressionLanguageEvaluator;
-use Pragmatist\Regel\Tests\Fixtures\MySubject;
+use Pragmatist\Regel\Tests\Fixtures\TestSubject;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -34,7 +34,7 @@ final class ExpressionLanguageEvaluatorTest extends \PHPUnit_Framework_TestCase
     {
         $expression = new Expression('true');
         $condition = new ExpressionLanguageCondition($expression);
-        $subject = new MySubject();
+        $subject = new TestSubject();
 
         $this->expressionLanguage->shouldReceive('evaluate')
             ->with($expression, ['foo' => 'bar'])

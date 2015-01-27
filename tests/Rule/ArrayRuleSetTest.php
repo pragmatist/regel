@@ -5,7 +5,7 @@ namespace Pragmatist\Regel\Tests\Rule;
 use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\Rule\ArrayRuleSet;
-use Pragmatist\Regel\Tests\Fixtures\MyAction;
+use Pragmatist\Regel\Tests\Fixtures\NonCallableAction;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldInstantiateWithRules()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule]);
         $this->assertArrayHasKey(0, $ruleSet);
         $this->assertEquals($rule, $ruleSet[0]);
@@ -36,7 +36,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldSetRules()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([]);
         $ruleSet[0] = $rule;
         $this->assertArrayHasKey(0, $ruleSet);
@@ -60,7 +60,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldBeTraversable()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule]);
 
         foreach ($ruleSet as $key => $ruleSetRule) {
@@ -74,7 +74,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldUnsetRules()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new MyAction());
+        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule]);
 
         unset($ruleSet[0]);

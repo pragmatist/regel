@@ -4,7 +4,7 @@ namespace Pragmatist\Regel\Tests\Fixtures;
 
 use Pragmatist\Regel\Subject\Subject;
 
-final class MySubject implements Subject
+final class TestSubject implements Subject
 {
     /**
      * @return array
