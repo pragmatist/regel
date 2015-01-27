@@ -1,10 +1,13 @@
 language: php
 install:
-  - composer install
+- composer install
 php:
-  - 5.6
-  - 5.5
-  - hhvm
+- 5.6
+- 5.5
+- hhvm
 script:
-  - bin/phpunit
-  - bin/phpcs --standard=PSR2 src tests
+- bin/phpunit
+- bin/phpcs --standard=PSR2 src tests
+notifications:
+  slack:
+    secure: c3RDPJdkm676+xevaQRWlIWjOLi7rBf7//+OOX3MC499CzlQu3skO46iZUbLpY/6wDRrZQ2zC9EiL2L/goVecTIh3UVsasT5jBRXEmO7oN7+DvTkjM6x3EcTNaNPfIrPFmkZ2+c8i0ZmuAqDi0neihUSZ7EK0m+1sl4W86TNLTw=
