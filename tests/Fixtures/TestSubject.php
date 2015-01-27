@@ -13,5 +13,4 @@ final class TestSubject implements Subject
     {
         return ['foo' => 'bar'];
     }
-
 }
