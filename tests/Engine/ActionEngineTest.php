@@ -157,5 +157,4 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
 
         $this->engine->applyRuleSetToSubject($ruleSet, $subject);
     }
-
 }
