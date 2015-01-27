@@ -2,15 +2,7 @@
 
 namespace Pragmatist\Regel\Tests\Fixtures;
 
-use Pragmatist\Regel\Subject\Subject;
-
-final class TestSubject implements Subject
+final class TestSubject
 {
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return ['foo' => 'bar'];
-    }
+    public $foo = 'bar';
 }
