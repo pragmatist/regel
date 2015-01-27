@@ -31,7 +31,7 @@ final class ArrayRuleSet implements RuleSet
     }
 
     /**
-     * @return Rule
+     * @return Rule|false
      */
     public function current()
     {
