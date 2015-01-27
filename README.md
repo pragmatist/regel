@@ -23,15 +23,10 @@ We have an application that imports e-mail messages. Based on the message, we wa
 First we define our domain object:
 
 ```php
-class EmailMessage implements Subject
+class EmailMessage
 {
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return ['fromAddress' => 'foo@example.com', 'body' => 'My very IMPORTANT message'];
-    }
+    public $fromAddress = 'foo@example.com';
+    public $body = 'My very IMPORTANT message';
 }
 ```
 
@@ -50,19 +45,17 @@ We then create our rule set containing two rules. Each of the rules has a condit
 $ruleSet = new ArrayRuleSet(
     [
         new ActionableRule(
-            ExpressionLanguageCondition::fromString("fromAddress == 'foo@example.com'"),
+            ExpressionLanguageCondition::fromString("subject.fromAddress == 'foo@example.com'"),
             new CallableAction(
-                function(Subject $subject) {
-                    // Perform an action when the condition matches
+                function ($subject) {
                     echo "Message is from foo@example.com!\n";
                 }
             )
         ),
         new ActionableRule(
-            ExpressionLanguageCondition::fromString("body matches '/IMPORTANT/'"),
+            ExpressionLanguageCondition::fromString("subject.body matches '/IMPORTANT/'"),
             new CallableAction(
-                function(Subject $subject) {
-                    // Perform an action when the condition matches
+                function ($subject) {
                     echo "Message is very important!\n";
                 }
             )
