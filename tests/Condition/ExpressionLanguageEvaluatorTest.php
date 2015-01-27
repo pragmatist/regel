@@ -1,11 +1,11 @@
 <?php
 
-namespace Pragmatist\Workflow\Tests;
+namespace Pragmatist\Regel\Tests;
 
 use Mockery as m;
-use Pragmatist\Workflow\Condition\ExpressionLanguageCondition;
-use Pragmatist\Workflow\Condition\ExpressionLanguageEvaluator;
-use Pragmatist\Workflow\Context\ArrayContext;
+use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
+use Pragmatist\Regel\Condition\ExpressionLanguageEvaluator;
+use Pragmatist\Regel\Context\ArrayContext;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 

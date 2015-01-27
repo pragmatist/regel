@@ -1,8 +1,8 @@
 <?php
 
-namespace Pragmatist\Workflow\Tests\Fixtures;
+namespace Pragmatist\Regel\Tests\Fixtures;
 
-use Pragmatist\Workflow\Action\Action;
+use Pragmatist\Regel\Action\Action;
 
 final class MyAction implements Action
 {

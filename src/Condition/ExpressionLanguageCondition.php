@@ -1,6 +1,6 @@
 <?php
 
-namespace Pragmatist\Workflow\Condition;
+namespace Pragmatist\Regel\Condition;
 
 use Symfony\Component\ExpressionLanguage\Expression;
 

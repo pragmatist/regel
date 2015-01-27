@@ -1,9 +1,9 @@
 <?php
 
-namespace Pragmatist\Workflow\Tests\Context;
+namespace Pragmatist\Regel\Tests\Context;
 
-use Pragmatist\Workflow\Context\ObjectVarsContextFactory;
-use Pragmatist\Workflow\Tests\Fixtures\Ticket;
+use Pragmatist\Regel\Context\ObjectVarsContextFactory;
+use Pragmatist\Regel\Tests\Fixtures\Ticket;
 
 final class ObjectVarsContextFactoryTest extends \PHPUnit_Framework_TestCase
 {

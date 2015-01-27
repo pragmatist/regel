@@ -1,8 +1,8 @@
 <?php
 
-namespace Pragmatist\Workflow\Action;
+namespace Pragmatist\Regel\Action;
 
-use Pragmatist\Workflow\Context\Context;
+use Pragmatist\Regel\Context\Context;
 
 interface ActionExecutor
 {

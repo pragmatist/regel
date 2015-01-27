@@ -1,8 +1,8 @@
 <?php
 
-namespace Pragmatist\Workflow\Context;
+namespace Pragmatist\Regel\Context;
 
-use Pragmatist\Workflow\Subject\Subject;
+use Pragmatist\Regel\Subject\Subject;
 
 final class ObjectVarsContextFactory implements ContextFactory
 {

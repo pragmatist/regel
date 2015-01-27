@@ -1,6 +1,6 @@
 <?php
 
-namespace Pragmatist\Workflow\Context;
+namespace Pragmatist\Regel\Context;
 
 interface Context
 {

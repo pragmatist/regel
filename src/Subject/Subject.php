@@ -1,6 +1,6 @@
 <?php
 
-namespace Pragmatist\Workflow\Subject;
+namespace Pragmatist\Regel\Subject;
 
 interface Subject
 {

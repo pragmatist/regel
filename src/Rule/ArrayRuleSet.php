@@ -1,6 +1,6 @@
 <?php
 
-namespace Pragmatist\Workflow\Rule;
+namespace Pragmatist\Regel\Rule;
 
 final class ArrayRuleSet implements RuleSet
 {

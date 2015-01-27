@@ -1,8 +1,8 @@
 <?php
 
-namespace Pragmatist\Workflow\Condition;
+namespace Pragmatist\Regel\Condition;
 
-use Pragmatist\Workflow\Context\Context;
+use Pragmatist\Regel\Context\Context;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class ExpressionLanguageEvaluator implements Evaluator

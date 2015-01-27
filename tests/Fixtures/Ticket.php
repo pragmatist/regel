@@ -1,8 +1,8 @@
 <?php
 
-namespace Pragmatist\Workflow\Tests\Fixtures;
+namespace Pragmatist\Regel\Tests\Fixtures;
 
-use Pragmatist\Workflow\Subject\Subject;
+use Pragmatist\Regel\Subject\Subject;
 
 final class Ticket implements Subject
 {

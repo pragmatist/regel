@@ -1,11 +1,11 @@
 <?php
 
-namespace Pragmatist\Workflow\Tests\Rule;
+namespace Pragmatist\Regel\Tests\Rule;
 
-use Pragmatist\Workflow\Condition\ExpressionLanguageCondition;
-use Pragmatist\Workflow\Rule\ActionableRule;
-use Pragmatist\Workflow\Rule\ArrayRuleSet;
-use Pragmatist\Workflow\Tests\Fixtures\MyAction;
+use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
+use Pragmatist\Regel\Rule\ActionableRule;
+use Pragmatist\Regel\Rule\ArrayRuleSet;
+use Pragmatist\Regel\Tests\Fixtures\MyAction;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase

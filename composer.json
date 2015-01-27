@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Pragmatist\\Workflow\\": "src"
+            "Pragmatist\\Regel\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Pragmatist\\Workflow\\Tests\\": "tests"
+            "Pragmatist\\Regel\\Tests\\": "tests"
         }
     },
     "config": {

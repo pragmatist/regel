@@ -1,6 +1,6 @@
 <?php
 
-namespace Pragmatist\Workflow\Action;
+namespace Pragmatist\Regel\Action;
 
 interface Action
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Pragmatist\Workflow\Tests\Engine;
+namespace Pragmatist\Regel\Tests\Engine;
 
 use Mockery as m;
-use Pragmatist\Workflow\Action\ActionExecutor;
-use Pragmatist\Workflow\Condition\Evaluator;
-use Pragmatist\Workflow\Condition\ExpressionLanguageCondition;
-use Pragmatist\Workflow\Context\ArrayContext;
-use Pragmatist\Workflow\Context\ContextFactory;
-use Pragmatist\Workflow\Engine\ActionEngine;
-use Pragmatist\Workflow\Rule\ActionableRule;
-use Pragmatist\Workflow\Rule\ArrayRuleSet;
-use Pragmatist\Workflow\Tests\Fixtures\MyAction;
-use Pragmatist\Workflow\Tests\Fixtures\Ticket;
+use Pragmatist\Regel\Action\ActionExecutor;
+use Pragmatist\Regel\Condition\Evaluator;
+use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
+use Pragmatist\Regel\Context\ArrayContext;
+use Pragmatist\Regel\Context\ContextFactory;
+use Pragmatist\Regel\Engine\ActionEngine;
+use Pragmatist\Regel\Rule\ActionableRule;
+use Pragmatist\Regel\Rule\ArrayRuleSet;
+use Pragmatist\Regel\Tests\Fixtures\MyAction;
+use Pragmatist\Regel\Tests\Fixtures\Ticket;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 final class ActionEngineTest extends \PHPUnit_Framework_TestCase

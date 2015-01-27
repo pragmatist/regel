@@ -1,9 +1,9 @@
 <?php
 
-namespace Pragmatist\Workflow\Rule;
+namespace Pragmatist\Regel\Rule;
 
-use Pragmatist\Workflow\Action\Action;
-use Pragmatist\Workflow\Condition\Condition;
+use Pragmatist\Regel\Action\Action;
+use Pragmatist\Regel\Condition\Condition;
 
 final class ActionableRule implements Rule
 {
