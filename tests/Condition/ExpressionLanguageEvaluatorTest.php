@@ -35,7 +35,7 @@ final class ExpressionLanguageEvaluatorTest extends \PHPUnit_Framework_TestCase
         $subject = new TestSubject();
 
         $this->expressionLanguage->shouldReceive('evaluate')
-            ->with($condition->getExpression(), ['foo' => 'bar'])
+            ->with($condition->getExpression(), ['subject' => $subject])
             ->andReturn(true);
 
         $this->assertTrue(

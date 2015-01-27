@@ -2,8 +2,6 @@
 
 namespace Pragmatist\Regel\Action;
 
-use Pragmatist\Regel\Subject\Subject;
-
 final class CallableAction implements Action
 {
     /**
@@ -20,9 +18,9 @@ final class CallableAction implements Action
     }
 
     /**
-     * @param Subject $subject
+     * @param mixed $subject
      */
-    public function __invoke(Subject $subject)
+    public function __invoke($subject)
     {
         call_user_func($this->callable, $subject);
     }
