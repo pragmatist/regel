@@ -6,7 +6,6 @@ use Mockery as m;
 use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Condition\ExpressionLanguageEvaluator;
 use Pragmatist\Regel\Tests\Fixtures\TestSubject;
-use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class ExpressionLanguageEvaluatorTest extends \PHPUnit_Framework_TestCase
@@ -32,12 +31,11 @@ final class ExpressionLanguageEvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldEvaluate()
     {
-        $expression = new Expression('true');
-        $condition = new ExpressionLanguageCondition($expression);
+        $condition = ExpressionLanguageCondition::fromString('true');
         $subject = new TestSubject();
 
         $this->expressionLanguage->shouldReceive('evaluate')
-            ->with($expression, ['foo' => 'bar'])
+            ->with($condition->getExpression(), ['foo' => 'bar'])
             ->andReturn(true);
 
         $this->assertTrue(
