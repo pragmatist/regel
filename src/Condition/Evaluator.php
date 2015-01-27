@@ -2,14 +2,14 @@
 
 namespace Pragmatist\Regel\Condition;
 
-use Pragmatist\Regel\Context\Context;
+use Pragmatist\Regel\Subject\Subject;
 
 interface Evaluator
 {
     /**
      * @param Condition $condition
-     * @param Context $context
+     * @param Subject $subject
      * @return bool
      */
-    public function evaluate(Condition $condition, Context $context);
+    public function evaluate(Condition $condition, Subject $subject);
 }

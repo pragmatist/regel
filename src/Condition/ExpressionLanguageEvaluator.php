@@ -2,7 +2,7 @@
 
 namespace Pragmatist\Regel\Condition;
 
-use Pragmatist\Regel\Context\Context;
+use Pragmatist\Regel\Subject\Subject;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class ExpressionLanguageEvaluator implements Evaluator
@@ -23,11 +23,11 @@ final class ExpressionLanguageEvaluator implements Evaluator
     /**
      * {@inheritdoc}
      */
-    public function evaluate(Condition $condition, Context $context)
+    public function evaluate(Condition $condition, Subject $subject)
     {
         return $this->expressionLanguage->evaluate(
             $condition->getExpression(),
-            $context->toArray()
+            $subject->toArray()
         );
     }
 }
