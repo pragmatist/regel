@@ -3,6 +3,7 @@
 namespace Pragmatist\Regel\Condition;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\ExpressionLanguage\SyntaxError;
 
 final class ExpressionLanguageEvaluator implements Evaluator
 {
@@ -24,9 +25,13 @@ final class ExpressionLanguageEvaluator implements Evaluator
      */
     public function evaluate(Condition $condition, $subject)
     {
-        return (bool) $this->expressionLanguage->evaluate(
-            $condition->getExpression(),
-            ['subject' => $subject]
-        );
+        try {
+            return (bool) $this->expressionLanguage->evaluate(
+                $condition->getExpression(),
+                ['subject' => $subject]
+            );
+        } catch (SyntaxError $exception) {
+            return false;
+        }
     }
 }
