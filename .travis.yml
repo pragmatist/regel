@@ -1,0 +1,10 @@
+language: php
+install:
+  - composer install
+php:
+  - 5.6
+  - 5.5
+  - hhvm
+script:
+  - bin/phpunit
+  - bin/phpcs --standard=PSR2 src tests
