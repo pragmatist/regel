@@ -5,7 +5,7 @@ namespace Pragmatist\Regel\Tests\Engine;
 use Mockery as m;
 use Pragmatist\Regel\Action\ActionExecutor;
 use Pragmatist\Regel\Condition\CallableCondition;
-use Pragmatist\Regel\Condition\Evaluator;
+use Pragmatist\Regel\Condition\ConditionEvaluator;
 use Pragmatist\Regel\Engine\ActionEngine;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\RuleSet\ArrayRuleSet;
@@ -23,7 +23,7 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
     /**
      * @var \Mockery\MockInterface
      */
-    private $evaluator;
+    private $conditionEvaluator;
 
     /**
      * @var \Mockery\MockInterface
@@ -38,12 +38,12 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->ruleSetProvider = m::mock(RuleSetProvider::class);
-        $this->evaluator = m::mock(Evaluator::class);
+        $this->conditionEvaluator = m::mock(ConditionEvaluator::class);
         $this->actionExecutor = m::mock(ActionExecutor::class);
 
         $this->engine = new ActionEngine(
             $this->ruleSetProvider,
-            $this->evaluator,
+            $this->conditionEvaluator,
             $this->actionExecutor
         );
     }
@@ -62,7 +62,7 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
             ->with('testRuleSet')
             ->andReturn($ruleSet);
 
-        $this->evaluator->shouldReceive('evaluate')
+        $this->conditionEvaluator->shouldReceive('evaluate')
             ->once()
             ->with($rule->getCondition(), $subject)
             ->andReturn(true);
@@ -88,7 +88,7 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
             ->with('testRuleSet')
             ->andReturn($ruleSet);
 
-        $this->evaluator->shouldReceive('evaluate')
+        $this->conditionEvaluator->shouldReceive('evaluate')
             ->once()
             ->with($rule->getCondition(), $subject)
             ->andReturn(false);

@@ -3,7 +3,7 @@
 namespace Pragmatist\Regel\Engine;
 
 use Pragmatist\Regel\Action\ActionExecutor;
-use Pragmatist\Regel\Condition\Evaluator;
+use Pragmatist\Regel\Condition\ConditionEvaluator;
 use Pragmatist\Regel\Rule\Rule;
 use Pragmatist\Regel\RuleSetProvider\RuleSetProvider;
 
@@ -15,9 +15,9 @@ final class ActionEngine implements Engine
     private $ruleSetProvider;
 
     /**
-     * @var Evaluator
+     * @var ConditionEvaluator
      */
-    private $evaluator;
+    private $conditionEvaluator;
 
     /**
      * @var ActionExecutor
@@ -26,13 +26,13 @@ final class ActionEngine implements Engine
 
     /**
      * @param RuleSetProvider $ruleSetProvider
-     * @param Evaluator $evaluator
+     * @param ConditionEvaluator $conditionEvaluator
      * @param ActionExecutor $actionExecutor
      */
-    public function __construct(RuleSetProvider $ruleSetProvider, Evaluator $evaluator, ActionExecutor $actionExecutor)
+    public function __construct(RuleSetProvider $ruleSetProvider, ConditionEvaluator $conditionEvaluator, ActionExecutor $actionExecutor)
     {
         $this->ruleSetProvider = $ruleSetProvider;
-        $this->evaluator = $evaluator;
+        $this->conditionEvaluator = $conditionEvaluator;
         $this->actionExecutor = $actionExecutor;
     }
 
@@ -57,7 +57,7 @@ final class ActionEngine implements Engine
      */
     private function applyRuleToSubject(Rule $rule, $subject)
     {
-        if (!$this->evaluator->evaluate($rule->getCondition(), $subject)) {
+        if (!$this->conditionEvaluator->evaluate($rule->getCondition(), $subject)) {
             return false;
         }
 

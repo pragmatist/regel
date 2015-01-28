@@ -2,7 +2,7 @@
 
 namespace Pragmatist\Regel\Condition;
 
-interface Evaluator
+interface ConditionEvaluator
 {
     /**
      * @param Condition $condition

@@ -5,7 +5,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use Pragmatist\Regel\Action\CallableAction;
 use Pragmatist\Regel\Action\CallableActionExecutor;
 use Pragmatist\Regel\Condition\CallableCondition;
-use Pragmatist\Regel\Condition\CallableEvaluator;
+use Pragmatist\Regel\Condition\CallableConditionEvaluator;
 use Pragmatist\Regel\Engine\ActionEngine;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\RuleSet\ArrayRuleSet;
@@ -41,7 +41,7 @@ $ruleSetProvider->addRuleSet(
 // Set up the RuleEngine. Also normally in your DI container.
 $engine = new ActionEngine(
     $ruleSetProvider,
-    new CallableEvaluator(),
+    new CallableConditionEvaluator(),
     new CallableActionExecutor()
 );
 

@@ -2,7 +2,7 @@
 
 namespace Pragmatist\Regel\Condition;
 
-final class CallableEvaluator implements Evaluator
+final class CallableConditionEvaluator implements ConditionEvaluator
 {
     /**
      * @param Condition $condition

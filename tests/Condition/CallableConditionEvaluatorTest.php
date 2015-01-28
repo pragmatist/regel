@@ -4,19 +4,19 @@ namespace Pragmatist\Regel\Tests\Condition;
 
 use Mockery as m;
 use Pragmatist\Regel\Condition\CallableCondition;
-use Pragmatist\Regel\Condition\CallableEvaluator;
+use Pragmatist\Regel\Condition\CallableConditionEvaluator;
 use Pragmatist\Regel\Condition\Condition;
 
-final class CallableEvaluatorTest extends \PHPUnit_Framework_TestCase
+final class CallableConditionEvaluatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CallableEvaluator
+     * @var CallableConditionEvaluator
      */
     private $evaluator;
 
     public function setUp()
     {
-        $this->evaluator = new CallableEvaluator();
+        $this->evaluator = new CallableConditionEvaluator();
     }
 
     /**
