@@ -53,7 +53,14 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldApplyRuleSetToSubject()
     {
-        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $rule = new ActionableRule(
+            new CallableCondition(
+                function () {
+                    return true;
+                }
+            ),
+            new NonCallableAction()
+        );
         $ruleSet = new ArrayRuleSet([$rule]);
         $subject = new TestSubject();
 
@@ -79,7 +86,14 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldAbortIfRuleSetRuleEvaluatesToFalse()
     {
-        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $rule = new ActionableRule(
+            new CallableCondition(
+                function () {
+                    return true;
+                }
+            ),
+            new NonCallableAction()
+        );
         $ruleSet = new ArrayRuleSet([$rule, $rule]);
         $subject = new TestSubject();
 

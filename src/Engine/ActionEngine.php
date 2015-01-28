@@ -29,8 +29,11 @@ final class ActionEngine implements Engine
      * @param ConditionEvaluator $conditionEvaluator
      * @param ActionExecutor $actionExecutor
      */
-    public function __construct(RuleSetProvider $ruleSetProvider, ConditionEvaluator $conditionEvaluator, ActionExecutor $actionExecutor)
-    {
+    public function __construct(
+        RuleSetProvider $ruleSetProvider,
+        ConditionEvaluator $conditionEvaluator,
+        ActionExecutor $actionExecutor
+    ) {
         $this->ruleSetProvider = $ruleSetProvider;
         $this->conditionEvaluator = $conditionEvaluator;
         $this->actionExecutor = $actionExecutor;

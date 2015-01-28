@@ -14,7 +14,14 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldInstantiateWithRules()
     {
-        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $rule = new ActionableRule(
+            new CallableCondition(
+                function () {
+                    return true;
+                }
+            ),
+            new NonCallableAction()
+        );
         $ruleSet = new ArrayRuleSet([$rule]);
         $this->assertArrayHasKey(0, $ruleSet);
         $this->assertEquals($rule, $ruleSet[0]);
@@ -35,7 +42,14 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldSetRules()
     {
-        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $rule = new ActionableRule(
+            new CallableCondition(
+                function () {
+                    return true;
+                }
+            ),
+            new NonCallableAction()
+        );
         $ruleSet = new ArrayRuleSet([]);
         $ruleSet[0] = $rule;
         $this->assertArrayHasKey(0, $ruleSet);
@@ -59,7 +73,14 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldBeTraversable()
     {
-        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $rule = new ActionableRule(
+            new CallableCondition(
+                function () {
+                    return true;
+                }
+            ),
+            new NonCallableAction()
+        );
         $ruleSet = new ArrayRuleSet([$rule]);
 
         foreach ($ruleSet as $key => $ruleSetRule) {
@@ -73,7 +94,14 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldUnsetRules()
     {
-        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $rule = new ActionableRule(
+            new CallableCondition(
+                function () {
+                    return true;
+                }
+            ),
+            new NonCallableAction()
+        );
         $ruleSet = new ArrayRuleSet([$rule]);
 
         unset($ruleSet[0]);
