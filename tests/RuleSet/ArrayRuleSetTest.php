@@ -2,11 +2,10 @@
 
 namespace Pragmatist\Regel\Tests\RuleSet;
 
-use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
+use Pragmatist\Regel\Condition\CallableCondition;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\RuleSet\ArrayRuleSet;
 use Pragmatist\Regel\Tests\Fixtures\NonCallableAction;
-use Symfony\Component\ExpressionLanguage\Expression;
 
 final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +14,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldInstantiateWithRules()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
+        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule]);
         $this->assertArrayHasKey(0, $ruleSet);
         $this->assertEquals($rule, $ruleSet[0]);
@@ -28,7 +27,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
     public function itShouldFailWhenInstantiatedWithInvalidValues()
     {
         $this->setExpectedException(\InvalidArgumentException::class);
-        new \Pragmatist\Regel\RuleSet\ArrayRuleSet(['foo', 'bar']);
+        new ArrayRuleSet(['foo', 'bar']);
     }
 
     /**
@@ -36,8 +35,8 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldSetRules()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
-        $ruleSet = new \Pragmatist\Regel\RuleSet\ArrayRuleSet([]);
+        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $ruleSet = new ArrayRuleSet([]);
         $ruleSet[0] = $rule;
         $this->assertArrayHasKey(0, $ruleSet);
         $this->assertEquals($rule, $ruleSet[0]);
@@ -49,7 +48,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldFailWhenSettingAnInvalidRule()
     {
-        $ruleSet = new \Pragmatist\Regel\RuleSet\ArrayRuleSet([]);
+        $ruleSet = new ArrayRuleSet([]);
 
         $this->setExpectedException(\InvalidArgumentException::class);
         $ruleSet[0] = 'foo';
@@ -60,8 +59,8 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldBeTraversable()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
-        $ruleSet = new \Pragmatist\Regel\RuleSet\ArrayRuleSet([$rule]);
+        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
+        $ruleSet = new ArrayRuleSet([$rule]);
 
         foreach ($ruleSet as $key => $ruleSetRule) {
             $this->assertEquals(0, $key);
@@ -74,7 +73,7 @@ final class ArrayRuleSetTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldUnsetRules()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
+        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule]);
 
         unset($ruleSet[0]);

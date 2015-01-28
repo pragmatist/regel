@@ -4,15 +4,14 @@ namespace Pragmatist\Regel\Tests\Engine;
 
 use Mockery as m;
 use Pragmatist\Regel\Action\ActionExecutor;
+use Pragmatist\Regel\Condition\CallableCondition;
 use Pragmatist\Regel\Condition\Evaluator;
-use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
 use Pragmatist\Regel\Engine\ActionEngine;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\RuleSet\ArrayRuleSet;
 use Pragmatist\Regel\RuleSetProvider\RuleSetProvider;
 use Pragmatist\Regel\Tests\Fixtures\NonCallableAction;
 use Pragmatist\Regel\Tests\Fixtures\TestSubject;
-use Symfony\Component\ExpressionLanguage\Expression;
 
 final class ActionEngineTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,7 +53,7 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldApplyRuleSetToSubject()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
+        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule]);
         $subject = new TestSubject();
 
@@ -80,7 +79,7 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
      */
     public function itShouldAbortIfRuleSetRuleEvaluatesToFalse()
     {
-        $rule = new ActionableRule(new ExpressionLanguageCondition(new Expression('true')), new NonCallableAction());
+        $rule = new ActionableRule(new CallableCondition(function () { return true; }), new NonCallableAction());
         $ruleSet = new ArrayRuleSet([$rule, $rule]);
         $subject = new TestSubject();
 
