@@ -29,9 +29,6 @@
             "Pragmatist\\Regel\\Tests\\": "tests"
         }
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.0.x-dev"
