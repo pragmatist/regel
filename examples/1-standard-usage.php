@@ -4,13 +4,12 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Pragmatist\Regel\Action\CallableAction;
 use Pragmatist\Regel\Action\CallableActionExecutor;
-use Pragmatist\Regel\Condition\ExpressionLanguageCondition;
-use Pragmatist\Regel\Condition\ExpressionLanguageEvaluator;
+use Pragmatist\Regel\Condition\CallableCondition;
+use Pragmatist\Regel\Condition\CallableEvaluator;
 use Pragmatist\Regel\Engine\ActionEngine;
 use Pragmatist\Regel\Rule\ActionableRule;
 use Pragmatist\Regel\RuleSet\ArrayRuleSet;
 use Pragmatist\Regel\RuleSetProvider\InMemoryRuleSetProvider;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 // Our example domain object
 class EmailMessage
@@ -20,14 +19,14 @@ class EmailMessage
 }
 
 
-// Set up our RuleSet and provider. Normally in your DI container.
+// Set up our RuleSet provider. Normally in your DI container.
 $ruleSetProvider = new InMemoryRuleSetProvider();
 $ruleSetProvider->addRuleSet(
     'email-ruleset',
     new ArrayRuleSet(
         [
             new ActionableRule(
-                ExpressionLanguageCondition::fromString("subject.body matches '/IMPORTANT/'"),
+                new CallableCondition(function($subject) { return preg_match('/important/i', $subject->body); }),
                 new CallableAction(
                     function ($subject) {
                         echo "E-mail '{$subject->subject}' is important!'\n";
@@ -42,7 +41,7 @@ $ruleSetProvider->addRuleSet(
 // Set up the RuleEngine. Also normally in your DI container.
 $engine = new ActionEngine(
     $ruleSetProvider,
-    new ExpressionLanguageEvaluator(new ExpressionLanguage()),
+    new CallableEvaluator(),
     new CallableActionExecutor()
 );
 
