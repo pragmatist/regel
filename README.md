@@ -1,9 +1,9 @@
 # Regel
 
-[![Build Status](https://travis-ci.org/Pragmatist/Regel.svg)](https://travis-ci.org/Pragmatist/Regel)
-[![Build Status](https://scrutinizer-ci.com/g/Pragmatist/Regel/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Pragmatist/Regel/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Pragmatist/Regel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Pragmatist/Regel/?branch=master)
-[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Pragmatist/Regel/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/pragmatist/regel.svg)](https://travis-ci.org/pragmatist/regel)
+[![Build Status](https://scrutinizer-ci.com/g/pragmatist/regel/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pragmatist/regel/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pragmatist/regel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pragmatist/regel/?branch=master)
+[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/pragmatist/regel/blob/master/LICENSE)
 
 Regel is a simple business rules engine for PHP 5.5+. It allows you apply dynamically created rules on your domain objects.
 

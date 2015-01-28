@@ -3,7 +3,7 @@
     "description": "A simple business rules engine.",
     "keywords": ["rule engine", "business rules"],
     "license": "MIT",
-    "homepage": "https://github.com/Pragmatist/Regel",
+    "homepage": "https://github.com/pragmatist/regel",
     "authors": [
         {
             "name": "Frank van den Brink",
