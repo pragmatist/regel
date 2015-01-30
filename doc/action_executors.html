@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Regel</title>
+
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://pragmatist.github.io/regel/">
+                Regel
+                <small class="hidden-xs hidden-sm">
+                    A simple business rules engine
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                Introduction
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/what_is_regel.html">
+                                            What is Regel
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/getting_started.html">
+                                            Getting started
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Extending Regel
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/condition_evaluators.html">
+                                            Condition evaluators
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="http://pragmatist.github.io/regel/doc/action_executors.html">
+                                            Action executors
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/ruleset_providers.html">
+                                            Rule set providers
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Creating action executors</h1>
+<p>Actions determine what happens when a rule should be applied. Each action is executed by an action executor.</p>
+<p>If you want to create your own actions and executors, you simply need to implement the <code>Pragmatist\Regel\Action\Action</code>
+and <code>Pragmatist\Regel\Action\ActionExecutor</code> interfaces.</p>
+<p>Let's create an action executor which turns actions into method calls on the subject.</p>
+<p>First, we need to create our action.</p>
+<pre><code class="language-php">use Pragmatist\Regel\Action\Action;
+
+final class SubjectMethodAction implements Action
+{
+    private $methodName;
+    private $parameters = [];
+
+    public function __construct($methodName, array $parameters = [])
+    {
+        $this-&gt;methodName = $methodName;
+        $this-&gt;parameters = $parameters;
+    }
+
+    public function __invoke($subject)
+    {
+        call_user_func_array([$subject, $this-&gt;methodName], $this-&gt;parameters);
+    }
+}</code></pre>
+<p>Our class makes us specify the method to call and its parameters upon instantiation. We then use the <code>__invoke</code> method
+to make our action callable when the action needs to be executed. It calls the defined method on the subject, and
+passes in the provided parameters.</p>
+<p>At this point we wouldn't have to write our own action executor, as the <code>CallableActionExecutor</code> is able to execute
+callable actions. We're going to do so anyway to see how it could be done.</p>
+<pre><code class="language-php">use Pragmatist\Regel\Action\ActionExecutor;
+
+final class SubjectMethodActionExecutor implements ActionExecutor
+{
+    public function execute(Action $action, $subject)
+    {
+        if (!$condition instanceof SubjectMethodAction) {
+            throw new \LogicException('This executor only handles actions of type SubjectMethodAction');
+        }
+
+        $action($subject);
+    }
+}</code></pre>
+<p>We only define a single function, which takes the action and the subject. It calls the action, passing in the subject.</p>
+<p>Now let's bring all of the above together and use our new subject method action.</p>
+<p>First lets define the actual subject of the rules; a class that represents a message.</p>
+<pre><code class="language-php">final class Message
+{
+    private $subject;
+    private $body;
+
+    public function __construct($subject, $body)
+    {
+        $this-&gt;subject = $subject;
+        $this-&gt;body = $body;
+    }
+
+    public function subject()
+    {
+        return $this-&gt;subject;
+    }
+
+    public function body()
+    {
+        return $this-&gt;body;
+    }
+
+    public function prefixSubject($prefix)
+    {
+        $this-&gt;subject = $prefix . $subject;
+    }
+}</code></pre>
+<p>Our message does not do a lot. It only has a subject and a body, and a single method which allows us to prefix the
+subject. That's the method we would like to call when our rule matches.</p>
+<p>Let's see how we would bring everything together.</p>
+<pre><code class="language-php">use Pragmatist\Regel\Condition\CallableCondition;
+use Pragmatist\Regel\Condition\CallableConditionEvaluator;
+use Pragmatist\Regel\Engine\ActionEngine;
+use Pragmatist\Regel\Rule\ActionableRule;
+use Pragmatist\Regel\RuleSet\ArrayRuleSet;
+use Pragmatist\Regel\RuleSetProvider\InMemoryRuleSetProvider;
+
+// Set up our RuleSet provider. Note that we use our custom SubjectMethodAction.
+$ruleSetProvider = new InMemoryRuleSetProvider();
+$ruleSetProvider-&gt;addRuleSet(
+    'message-ruleset',
+    new ArrayRuleSet(
+        [
+            new ActionableRule(
+                new CallableCondition(function($subject) { return preg_match('/important/i', $subject-&gt;body); }),
+                new SubjectMethodAction('prefixSubject', ['IMPORTANT: '])
+            )
+        ]
+    )
+);
+
+// Set up the RuleEngine with our own SubjectMethodActionExecutor.
+$engine = new ActionEngine(
+    $ruleSetProvider,
+    new CallableConditionEvaluator(),
+    new SubjectMethodActionExecutor()
+);
+
+// Apply the ruleset to a subject
+$message = new Message('My message', 'This message is very important and should be read.');
+$engine-&gt;applyRuleSetToSubject('message-ruleset', $message);
+
+echo $message-&gt;subject(); // Outputs "IMPORTANT: My message"</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

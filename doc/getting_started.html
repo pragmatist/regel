@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Regel</title>
+
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://pragmatist.github.io/regel/">
+                Regel
+                <small class="hidden-xs hidden-sm">
+                    A simple business rules engine
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                Introduction
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/what_is_regel.html">
+                                            What is Regel
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="http://pragmatist.github.io/regel/doc/getting_started.html">
+                                            Getting started
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Extending Regel
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/condition_evaluators.html">
+                                            Condition evaluators
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/action_executors.html">
+                                            Action executors
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/ruleset_providers.html">
+                                            Rule set providers
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Getting started</h1>
+<h2>Installation</h2>
+<p>Using <a href="https://getcomposer.org/">Composer</a>:</p>
+<pre><code class="language-bash">composer require pragmatist/regel</code></pre>
+<h2>Defining your rules</h2>
+<p>Your business rules are what it's all about. A rule always has a condition and an action. When the condition matches the
+subject, your action is executed.</p>
+<p>If we use the built in callback condition and action types, you can define a rule as follows:</p>
+<pre><code class="language-php">use Pragmatist\Regel\Condition\CallableCondition;
+use Pragmatist\Regel\Action\CallableAction;
+use Pragmatist\Regel\Rule\ActionableRule;
+
+$rule = new ActionableRule(
+    new CallableCondition(function($subject) { return preg_match('/important/i', $subject-&gt;body); }),
+    new CallableAction(
+        function ($subject) {
+            echo "E-mail '{$subject-&gt;subject}' is important!'\n";
+        }
+    )
+)</code></pre>
+<p>In the above example we instantiate an instance of the ActionableRule class, which represents our rule. It takes two
+constructor arguments; the condition and the action. The condition in this case is a callback, which takes the subject
+our rule applies to as its only parameter. The action is also a callback, which can be whatever you need to execute
+if the rule matches.</p>
+<p>This in itself is less useful, but illustrates well what Regel's basic rule structure is. The real power of Regel starts
+to show when you define your own condition and action types, as shown in a later section of the documentation.</p>
+<h2>Using rule sets</h2>
+<p>A single rule on its own doesn't do that much. We can combine multiple rules into rule sets, which can be executed
+sequentually on a given subject. In order for us to use rule sets in our rule engine, we have to define a so called
+rule set provider. The rule set provider is responsible for providing rule sets to the engine. We can define a rule set
+provider as follows.</p>
+<pre><code class="language-php">use Pragmatist\Regel\RuleSet\ArrayRuleSet;
+use Pragmatist\Regel\RuleSetProvider\InMemoryRuleSetProvider;
+
+$ruleSetProvider = new InMemoryRuleSetProvider();
+$ruleSetProvider-&gt;addRuleSet(
+    'email-ruleset',
+    new ArrayRuleSet(
+        [$rule, $anotherRule]
+    )
+);</code></pre>
+<p>In this case we are using the in memory rule set provider, which requires us to pass the rule sets directly. We simply
+define a new rule set and pass in the rules as instantiated earlier. Note that we also define a name for our rule set.
+This is important when deciding what rule set to apply on our subject later.</p>
+<h2>Using the rule engine</h2>
+<p>Now that we have defined our rule set and a provider, we can instantiate the rule engine itself. We do that as follows.</p>
+<pre><code class="language-php">use Pragmatist\Regel\Action\CallableActionExecutor;
+use Pragmatist\Regel\Condition\CallableConditionEvaluator;
+use Pragmatist\Regel\Engine\ActionEngine;
+
+$engine = new ActionEngine(
+    $ruleSetProvider,
+    new CallableConditionEvaluator(),
+    new CallableActionExecutor()
+);</code></pre>
+<p>Here we pass in the rule set provider we defined earlier. We are also passing in two other components, the condition
+evaluator and the action executor. The condition evaluator knows how to evaluate conditions of a specific type (in this
+case the callable condition), while the action executor knows how to handle actions of a specific type (the callable
+action).</p>
+<p>All of these components are interchangable with your own components, as long as they implement the correct interfaces.
+More about this in the section on extending Regel.</p>
+<p>The next step is actually applying our ruleset to a given subject. We do that as follows.</p>
+<pre><code class="language-php">$subject = new MyEmailMessage();
+$engine-&gt;applyRuleSetToSubject('email-ruleset', $subject);</code></pre>
+<p>This will retrieve the "email-ruleset" rule set from the rule set provider, and then evaluate all rule conditions
+sequentually, give the subject. When a certain rule's condition evaluates to true, it will execute that rule's action.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

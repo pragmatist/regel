@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Regel</title>
+
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="http://pragmatist.github.io/regel/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://pragmatist.github.io/regel/">
+                Regel
+                <small class="hidden-xs hidden-sm">
+                    A simple business rules engine
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                                                    <p class="text-muted">
+                                Introduction
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="active">
+                                        <a href="http://pragmatist.github.io/regel/doc/what_is_regel.html">
+                                            What is Regel
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/getting_started.html">
+                                            Getting started
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Extending Regel
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/condition_evaluators.html">
+                                            Condition evaluators
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/action_executors.html">
+                                            Action executors
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://pragmatist.github.io/regel/doc/ruleset_providers.html">
+                                            Rule set providers
+                                        </a>
+                                    </li>
+                                                            </ul>
+                        
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>What is Regel</h1>
+<p>Regel is a simple, extensible, business rule engine. Its primary goal is to provide you with the basic interfaces and
+classes needed to construct your own rule engine specific to your needs.</p>
+<h2>What is a business rule engine</h2>
+<p>In a software application, business rules can change more frequently than other parts of your application code. A
+business rule engine executes business rules which have been separated from your application code. This separation
+can allow business users to modify the rules without the intervention of a software developer.</p>
+<h2>Rules, actions, conditions and subjects</h2>
+<p>A rule represents a business rule. A business rule always consists of a condition, and an action. If the condition
+evaluates to true, the rule's action is executed.</p>
+<p>Subjects provide the context of a rule's condition and action, and can influence the outcome of the rule.</p>
+<p>Take the following sentence:</p>
+<blockquote>
+<p>When an incoming message's body contains the word "important", forward the message to Bob.</p>
+</blockquote>
+<p>In the above sentence, the incoming message is the subject. Whether the body contains the word "important" is the rule
+condition, while forwarding it to Bob is the action.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
