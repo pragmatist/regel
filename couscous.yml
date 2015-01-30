@@ -30,4 +30,10 @@ menu:
                 ruleset_providers:
                     itemId: ruleset_providers
                     text: Rule set providers
-                    relativeUrl: doc/ruleset_providers.html
+                    relativeUrl: doc/ruleset_providers.
+        plugins:
+            name: Plugins
+            items:
+                expression_language_evaluator:
+                    text: Symfony ExpressionLanguage Evaluator
+                    absoluteUrl: http://pragmatist.github.io/regel-expression-language-evaluator/
