@@ -1,0 +1,33 @@
+title: Regel
+subTitle: A simple business rules engine
+baseUrl: http://pragmatist.github.io/regel
+template:
+    url: https://github.com/CouscousPHP/Template-Dark
+menu:
+    sections:
+        introduction:
+            name: Introduction
+            items:
+                what_is_regel:
+                    itemId: what_is_regel
+                    text: What is Regel
+                    relativeUrl: doc/what_is_regel.html
+                getting_started:
+                    itemId: getting_started
+                    text: Getting started
+                    relativeUrl: doc/getting_started.html
+        extending:
+            name: Extending Regel
+            items:
+                condition_evaluators:
+                    itemId: condition_evaluators
+                    text: Condition evaluators
+                    relativeUrl: doc/condition_evaluators.html
+                action_executors:
+                    itemId: action_executors
+                    text: Action executors
+                    relativeUrl: doc/action_executors.html
+                ruleset_providers:
+                    itemId: ruleset_providers
+                    text: Rule set providers
+                    relativeUrl: doc/ruleset_providers.html
