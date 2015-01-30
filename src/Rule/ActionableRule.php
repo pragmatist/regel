@@ -30,7 +30,7 @@ final class ActionableRule implements Rule
     /**
      * @return Condition
      */
-    public function getCondition()
+    public function condition()
     {
         return $this->condition;
     }
@@ -38,7 +38,7 @@ final class ActionableRule implements Rule
     /**
      * @return Action
      */
-    public function getAction()
+    public function action()
     {
         return $this->action;
     }

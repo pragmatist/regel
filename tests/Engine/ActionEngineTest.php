@@ -64,19 +64,19 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
         $ruleSet = new ArrayRuleSet([$rule]);
         $subject = new TestSubject();
 
-        $this->ruleSetProvider->shouldReceive('getRuleSetIdentifiedBy')
+        $this->ruleSetProvider->shouldReceive('ruleSetIdentifiedBy')
             ->once()
             ->with('testRuleSet')
             ->andReturn($ruleSet);
 
         $this->conditionEvaluator->shouldReceive('evaluate')
             ->once()
-            ->with($rule->getCondition(), $subject)
+            ->with($rule->condition(), $subject)
             ->andReturn(true);
 
         $this->actionExecutor->shouldReceive('execute')
             ->once()
-            ->with($rule->getAction(), $subject);
+            ->with($rule->action(), $subject);
 
         $this->engine->applyRuleSetToSubject('testRuleSet', $subject);
     }
@@ -97,14 +97,14 @@ final class ActionEngineTest extends \PHPUnit_Framework_TestCase
         $ruleSet = new ArrayRuleSet([$rule, $rule]);
         $subject = new TestSubject();
 
-        $this->ruleSetProvider->shouldReceive('getRuleSetIdentifiedBy')
+        $this->ruleSetProvider->shouldReceive('ruleSetIdentifiedBy')
             ->once()
             ->with('testRuleSet')
             ->andReturn($ruleSet);
 
         $this->conditionEvaluator->shouldReceive('evaluate')
             ->once()
-            ->with($rule->getCondition(), $subject)
+            ->with($rule->condition(), $subject)
             ->andReturn(false);
 
         $this->actionExecutor->shouldReceive('execute')

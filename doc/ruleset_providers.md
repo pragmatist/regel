@@ -36,7 +36,7 @@ final class FilesystemRuleSetProvider implements RuleSetProvider
         );
     }
 
-    public function getRuleSetIdentifiedBy($identifier)
+    public function ruleSetIdentifiedBy($identifier)
     {
         if ($this->filesystem->has($identifier)) {
             return unserialize($this->filesystem->read($identifier));

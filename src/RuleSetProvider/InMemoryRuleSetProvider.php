@@ -32,10 +32,10 @@ final class InMemoryRuleSetProvider implements RuleSetProvider
 
     /**
      * @param string $identifier
-     * @return \Pragmatist\Regel\RuleSet\RuleSet
+     * @return RuleSet
      * @throws \InvalidArgumentException
      */
-    public function getRuleSetIdentifiedBy($identifier)
+    public function ruleSetIdentifiedBy($identifier)
     {
         if (array_key_exists($identifier, $this->ruleSets)) {
             return $this->ruleSets[$identifier];

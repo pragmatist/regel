@@ -17,7 +17,7 @@ final class InMemoryRuleSetProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $ruleSet,
-            $provider->getRuleSetIdentifiedBy('test')
+            $provider->ruleSetIdentifiedBy('test')
         );
     }
 
@@ -33,7 +33,7 @@ final class InMemoryRuleSetProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $ruleSet,
-            $provider->getRuleSetIdentifiedBy('test')
+            $provider->ruleSetIdentifiedBy('test')
         );
     }
 
@@ -44,6 +44,6 @@ final class InMemoryRuleSetProviderTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(\InvalidArgumentException::class);
         $provider = new InMemoryRuleSetProvider();
-        $provider->getRuleSetIdentifiedBy('test');
+        $provider->ruleSetIdentifiedBy('test');
     }
 }

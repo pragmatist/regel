@@ -10,5 +10,5 @@ interface RuleSetProvider
      * @param $identifier
      * @return RuleSet
      */
-    public function getRuleSetIdentifiedBy($identifier);
+    public function ruleSetIdentifiedBy($identifier);
 }

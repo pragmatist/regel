@@ -10,10 +10,10 @@ interface Rule
     /**
      * @return Condition
      */
-    public function getCondition();
+    public function condition();
 
     /**
      * @return Action
      */
-    public function getAction();
+    public function action();
 }

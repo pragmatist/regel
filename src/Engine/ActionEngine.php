@@ -45,7 +45,7 @@ final class ActionEngine implements Engine
      */
     public function applyRuleSetToSubject($ruleSetIdentifier, $subject)
     {
-        $ruleSet = $this->ruleSetProvider->getRuleSetIdentifiedBy($ruleSetIdentifier);
+        $ruleSet = $this->ruleSetProvider->ruleSetIdentifiedBy($ruleSetIdentifier);
         foreach ($ruleSet as $rule) {
             if (!$this->applyRuleToSubject($rule, $subject)) {
                 break;
@@ -60,11 +60,11 @@ final class ActionEngine implements Engine
      */
     private function applyRuleToSubject(Rule $rule, $subject)
     {
-        if (!$this->conditionEvaluator->evaluate($rule->getCondition(), $subject)) {
+        if (!$this->conditionEvaluator->evaluate($rule->condition(), $subject)) {
             return false;
         }
 
-        $this->actionExecutor->execute($rule->getAction(), $subject);
+        $this->actionExecutor->execute($rule->action(), $subject);
         return true;
     }
 }
