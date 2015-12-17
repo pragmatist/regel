@@ -30,7 +30,7 @@ menu:
                 ruleset_providers:
                     itemId: ruleset_providers
                     text: Rule set providers
-                    relativeUrl: doc/ruleset_providers.
+                    relativeUrl: doc/ruleset_providers.html
         plugins:
             name: Plugins
             items:
