@@ -1,5 +1,7 @@
 # Regel
 
+## This package has been abandoned and is no longer updated
+
 [![Build Status](https://travis-ci.org/pragmatist/regel.svg)](https://travis-ci.org/pragmatist/regel)
 [![Build Status](https://scrutinizer-ci.com/g/pragmatist/regel/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pragmatist/regel/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pragmatist/regel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pragmatist/regel/?branch=master)
