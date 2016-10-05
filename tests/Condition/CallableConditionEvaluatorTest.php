@@ -27,7 +27,7 @@ final class CallableConditionEvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(
             $this->evaluator->evaluate(
                 new CallableCondition(
-                    function($subject) {
+                    function ($subject) {
                         return ($subject == 'foo');
                     }
                 ),
@@ -44,7 +44,7 @@ final class CallableConditionEvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(
             $this->evaluator->evaluate(
                 new CallableCondition(
-                    function($subject) {
+                    function ($subject) {
                         return $subject;
                     }
                 ),
@@ -55,7 +55,7 @@ final class CallableConditionEvaluatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(
             $this->evaluator->evaluate(
                 new CallableCondition(
-                    function($subject) {
+                    function ($subject) {
                         return $subject;
                     }
                 ),
